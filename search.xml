@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Js同步与异步</title>
+    <url>/2020/04/01/JS%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/</url>
+    <content><![CDATA[<h1 id="Js的同步与异步问题"><a href="#Js的同步与异步问题" class="headerlink" title="Js的同步与异步问题"></a>Js的同步与异步问题</h1><h2 id="Js知识"><a href="#Js知识" class="headerlink" title="Js知识"></a>Js知识</h2><a id="more"></a>
+
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>如果有人问你Js的同步异步问题，你该怎么回答？理解一个问题无非是what-why-how，js同步和异步问题是什么–&gt;为什么会产生异步问题–&gt;如何解决。</p>
+<blockquote>
+<p>首先，我们要知道Js是单线程的，同一时间只处理一个任务，这已经成这门语言的核心特征。</p>
+</blockquote>
+<h3 id="同步与异步（重点）"><a href="#同步与异步（重点）" class="headerlink" title="同步与异步（重点）"></a>同步与异步（重点）</h3><p><font color="orange">同步</font>就是任务放入到队列中后按照顺序执行；<br><font color="orange">异步</font>就是同时进行多个任务。<br>举个例子：比方说你要烧水做菜，如果你先烧水，等着水烧开，再去做菜，这就是同步操作；但如果你边烧着水，同时准备做菜材料，同时进行，这就是异步操作；<br>&nbsp;<br>js单线程是执行同步操作的，但有时也需要异步操作，防止某一块解析时间过长，造成“卡死”情况。<br>那么，js单线程又是如何实现异步的呢? ——<strong>是通过事件循环实现“异步”</strong><br>js中，最基础的异步是setTimeout和setInterval函数，还有onclick, ajax等异步操作。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> console.log(&apos;1&apos;)</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line"> console.log(&apos;2&apos;)</span><br><span class="line">&#125;,0)</span><br><span class="line">console.log(&apos;3&apos;)  </span><br><span class="line">//输出       1，3，2</span><br></pre></td></tr></table></figure>
+
+<h3 id="promise解决异步问题"><a href="#promise解决异步问题" class="headerlink" title="promise解决异步问题"></a>promise解决异步问题</h3><p>promise解决嵌套回调的问题，将嵌套的回调函数改成.then()的连缀使用。<br>Promise有这些特征：只能决议一次，决议值只能有一个，决议之后无法改变。任何then中的回调也只会被调用一次。Promise的特征保证了Promise可以解决信任问题。</p>
+<h4 id="promise-的使用"><a href="#promise-的使用" class="headerlink" title="promise 的使用"></a>promise 的使用</h4><blockquote>
+<p>首先通过new Promise（function）创建一个promise对象，接收一个函数参数，并且在函数中传入resolve以及reject两个参数；</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var p = new Promise(function(resolve, reject)&#123;      </span><br><span class="line">            //做一些异步操作</span><br><span class="line">            setTimeout(function()&#123;</span><br><span class="line">                console.log(&apos;这是一个异步操作&apos;);</span><br><span class="line">                resolve(&apos;异步操作成功并且结束&apos;);</span><br><span class="line">            &#125;, 1000);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>then() 接收两个函数，分别是对promise的resolve及reject状态处理的函数，并且处理结束之后返回promise对象</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function fn1() &#123;</span><br><span class="line">       console.log(&quot;第一个函数开始执行&quot;);</span><br><span class="line">       var p = new Promise(function (resolve, reject) &#123;</span><br><span class="line">           setTimeout(function () &#123;</span><br><span class="line">               console.log(&apos;第一个函数执行完毕&apos;);</span><br><span class="line">               resolve(&apos;接下来进入第二个函数&apos;);</span><br><span class="line">           &#125;, 1000);</span><br><span class="line">       &#125;);</span><br><span class="line">       return p;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   function fn2(data) &#123;</span><br><span class="line">       console.log(data);</span><br><span class="line">       console.log(&apos;第二个函数开始执行&apos;);</span><br><span class="line">       var p = new Promise(function (resolve, reject) &#123;</span><br><span class="line">           setTimeout(function () &#123;</span><br><span class="line">               var num = Math.ceil(Math.random() * 10); // 生成随机数</span><br><span class="line">              console.log(num);</span><br><span class="line">               //num = 0；设置num=0</span><br><span class="line">               if (num === 0) &#123;</span><br><span class="line">                   console.log(&apos;第二个函数执行完毕&apos;);</span><br><span class="line">                   resolve(&apos;所有函数执行完毕&apos;);</span><br><span class="line">               &#125;</span><br><span class="line">               else&#123;</span><br><span class="line">                   reject(&quot;执行函数2失败&quot;);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;, 2000);</span><br><span class="line">       &#125;);</span><br><span class="line">       return p;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   fn1()</span><br><span class="line">       .then(function (data) &#123;</span><br><span class="line">           return fn2(data);</span><br><span class="line">       &#125;)</span><br><span class="line">       .then(function (data) &#123;</span><br><span class="line">           console.log(data);</span><br><span class="line">       &#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em>第一个函数开始执行</em></li>
+<li><em>第一个函数执行完毕</em></li>
+<li><em>接下来进入第二个函数</em></li>
+<li><em>第二个函数开始执行</em></li>
+<li><em>第二个函数执行完毕</em></li>
+<li><em>所有函数执行完毕</em><br>&emsp;&emsp;<font size="2">调用reslove</font></li>
+</ul>
+<p>.all() 接收一个函数数组，进行并发操作，并将每个函数的结果以数组的形式返回。<br>.race()接收函数数组，函数先执行完成之后先进入下一个回调函数中。<br>.catch() 当then中出现错误时不会中止整个函数，catch能够获取到错误并进行提示。   </p>
+<h2 id="这几种方法不做详述啦！会用即可，好了！今天先到这里，我们下期见"><a href="#这几种方法不做详述啦！会用即可，好了！今天先到这里，我们下期见" class="headerlink" title="这几种方法不做详述啦！会用即可，好了！今天先到这里，我们下期见!"></a>这几种方法不做详述啦！会用即可，好了！今天先到这里，我们下期见!</h2>]]></content>
+      <tags>
+        <tag>Js</tag>
+        <tag>解决异步</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue双向绑定原理</title>
     <url>/2020/03/23/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<h1 id="详述Vue的数据双向绑定原理"><a href="#详述Vue的数据双向绑定原理" class="headerlink" title="详述Vue的数据双向绑定原理"></a>详述Vue的数据双向绑定原理</h1><h2 id="前端知识"><a href="#前端知识" class="headerlink" title="前端知识"></a>前端知识</h2><a id="more"></a>
@@ -144,8 +182,8 @@
         <category>小程序</category>
       </categories>
       <tags>
-        <tag>小程序</tag>
         <tag>Vue</tag>
+        <tag>小程序</tag>
       </tags>
   </entry>
 </search>
