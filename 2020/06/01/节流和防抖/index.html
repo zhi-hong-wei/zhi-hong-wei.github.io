@@ -4,20 +4,23 @@
   <meta charset="utf-8">
   <meta name="baidu-site-verification" content="L6Lm9d5Crl">
   
-   
-    <meta name="keywords" content="生活">
   
   
   
-  <title>Tag: 生活 | zhi</title>
+  <title>节流和防抖 | zhi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zhi">
-<meta property="og:url" content="http://zhi.com/tags/生活/index.html">
+  <meta name="description" content="Js的同步与异步问题Js知识">
+<meta name="keywords" content="Js,Js封装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="节流和防抖">
+<meta property="og:url" content="http://zhi.com/2020/06/01/节流和防抖/index.html">
 <meta property="og:site_name" content="zhi">
+<meta property="og:description" content="Js的同步与异步问题Js知识">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-06-01T06:26:50.575Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhi">
+<meta name="twitter:title" content="节流和防抖">
+<meta name="twitter:description" content="Js的同步与异步问题Js知识">
   
     <link rel="alternative" href="/atom.xml" title="zhi" type="application/atom+xml">
   
@@ -42,9 +45,9 @@
           fancybox: true,
           animate: true,
           isHome: false,
-          isPost: false,
+          isPost: true,
           isArchive: false,
-          isTag: true,
+          isTag: false,
           isCategory: false,
           open_in_new: false
       }
@@ -270,56 +273,206 @@
         </header>
     </div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-节流和防抖" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a  href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a  href="/2020/04/10/个人笔记总结/" class="archive-article-date">
-      <time datetime="2020-04-10T11:38:18.000Z" itemprop="datePublished">04-10</time>
+    <div class="article-meta">
+      <a  href="/2020/06/01/节流和防抖/" class="article-date">
+      <time datetime="2020-06-01T06:10:07.000Z" itemprop="datePublished">2020-06-01</time>
 </a>
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a  class="archive-article-title" href="/2020/04/10/个人笔记总结/">小小日记</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      节流和防抖
     </h1>
   
 
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 
-          
+        
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活/">生活</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Js/">Js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Js封装/">Js封装</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Js的同步与异步问题"><a href="#Js的同步与异步问题" class="headerlink" title="Js的同步与异步问题"></a>Js的同步与异步问题</h1><h2 id="Js知识"><a href="#Js知识" class="headerlink" title="Js知识"></a>Js知识</h2><a id="more"></a>
+
+<h3 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h3><p>防抖与节流是前端最基本的优化技巧，实现很简单，为了记录下，可供学习参考。</p>
+<h4 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h4><h5 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h5><blockquote>
+<p>防抖就是在持续触发事件的时候，只有当不触发事件一段时间后才会执行处理的函数，当触发一次事件后，在规定事件内再次触发， 就会清除上次的定时任务，重新创建定时任务。</p>
+<ul>
+<li>实现方式：每次触发事件时设置一个延迟调用方法，并且取消之前的延时调用方法</li>
+<li>缺点：如果事件在规定的时间间隔内被不断的触发，则调用方法会被不断的延迟</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//防抖debounce代码：</span><br><span class="line">function debounce(fn,delay) &#123;</span><br><span class="line">    var timeout = null; // 创建一个标记用来存放定时器的返回值</span><br><span class="line">    return function (e) &#123;</span><br><span class="line">        // 每当用户输入的时候把前一个 setTimeout clear 掉</span><br><span class="line">        clearTimeout(timeout); </span><br><span class="line">        // 然后又创建一个新的 setTimeout, 这样就能保证interval 间隔内如果时间持续触发，就不会执行 fn 函数</span><br><span class="line">        timeout = setTimeout(() =&gt; &#123;</span><br><span class="line">            fn.apply(this, arguments);</span><br><span class="line">        &#125;, delay);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">// 处理函数</span><br><span class="line">function handle() &#123;</span><br><span class="line">    console.log(&apos;防抖：&apos;, Math.random());</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line">//滚动事件</span><br><span class="line">window.addEventListener(&apos;scroll&apos;, debounce(handle,500));</span><br></pre></td></tr></table></figure>
+
+<h4 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h4><h5 id="概念：-1"><a href="#概念：-1" class="headerlink" title="概念："></a>概念：</h5><blockquote>
+<p>节流就是在持续触发事件的时候，利用标志位进行控制处理函数是否执行，比如为 true 执行，为 false 不执行<br>通过指定间隔时间修改标志位的值即可实现在指定时间内只触发一次处理函数</p>
+<ul>
+<li>实现方式：每次触发事件时，如果当前有等待执行的延时函数，则直接return</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//节流throttle代码：</span><br><span class="line">function throttle(fn,delay) &#123;</span><br><span class="line">    let canRun = true; // 通过闭包保存一个标记</span><br><span class="line">    return function () &#123;</span><br><span class="line">         // 在函数开头判断标记是否为true，不为true则return</span><br><span class="line">        if (!canRun) return;</span><br><span class="line">         // 立即设置为false</span><br><span class="line">        canRun = false;</span><br><span class="line">        // 将外部传入的函数的执行放在setTimeout中</span><br><span class="line">        setTimeout(() =&gt; &#123; </span><br><span class="line">        // 最后在setTimeout执行完毕后再把标记设置为true(关键)表示可以执行下一次循环了。</span><br><span class="line">        // 当定时器没有执行的时候标记永远是false，在开头被return掉</span><br><span class="line">            fn.apply(this, arguments);</span><br><span class="line">            canRun = true;</span><br><span class="line">        &#125;, delay);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">function sayHi(e) &#123;</span><br><span class="line">    console.log(&apos;节流：&apos;, e.target.innerWidth, e.target.innerHeight);</span><br><span class="line">&#125;</span><br><span class="line">window.addEventListener(&apos;resize&apos;, throttle(sayHi,500));</span><br></pre></td></tr></table></figure>
+
+<p>###总结<br><strong>函数防抖</strong>：将多次操作合并为一次操作进行。原理是维护一个计时器，规定在delay时间后触发函数，但是在delay时间内再次触发的话，就会取消之前的计时器而重新设置。这样一来，只有最后一次操作能被触发。<br><strong>函数节流</strong>：使得一定时间内只触发一次函数。原理是通过判断是否有延迟调用函数未执行。<br><strong>区别</strong>： 函数节流不管事件触发有多频繁，都会保证在规定时间内一定会执行一次真正的事件处理函数，而函数防抖只是在最后一次事件后才触发一次函数。 比如在页面的无限加载场景下，我们需要用户在滚动页面时，<br>每隔一段时间发一次 Ajax 请求，而不是在用户停下滚动页面操作时才去请求数据。这样的场景，就适合用节流技术来实现。</p>
+
+      
+    </div>
+    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2020/06/01/节流和防抖/">节流和防抖</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问 智宏伟 的个人博客">智宏伟</a></p>
+        <p><span>发布时间:</span>2020年06月01日 - 14时10分</p>
+        <p><span>最后更新:</span>2020年06月01日 - 14时26分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/06/01/节流和防抖/" title="节流和防抖">http://zhi.com/2020/06/01/节流和防抖/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhi.com/2020/06/01/节流和防抖/　　作者: 智宏伟" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a  href="/2020/04/10/个人笔记总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">小小日记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Js的同步与异步问题"><span class="toc-number">1.</span> <span class="toc-text">Js的同步与异步问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Js知识"><span class="toc-number">1.1.</span> <span class="toc-text">Js知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#防抖与节流"><span class="toc-number">1.1.1.</span> <span class="toc-text">防抖与节流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#防抖"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">防抖</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#概念："><span class="toc-number">1.1.1.1.1.</span> <span class="toc-text">概念：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#节流"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">节流</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#概念：-1"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">概念：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
 
     
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: '7qP89AqaegEAfuaBOvWFYp0X-gzGzoHsz',
+      conf: 'mSvE01t07fzcIarDuy75T9Vx'
+    });
+  </script>
+</section>
+    
 
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/2020/04/10/个人笔记总结/" title="下一篇: 小小日记">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/06/01/节流和防抖/">节流和防抖</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/10/个人笔记总结/">小小日记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/01/JS同步与异步/">Js同步与异步</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/Vue双向绑定原理/">Vue双向绑定原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/21/小程序与Vue区别/">小程序开发和Vue组件化开发的使用区别</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
 
 </div>
       <footer id="footer">
@@ -411,18 +564,6 @@ ga('send', 'pageview');
         };
     })
 </script>
-
-    <button class="hide-labels">TAG 开关</button>
-    
-<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $("button").click(function() {
-                $(".article-info").toggle(200);
-            });
-        });
-    </script>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
