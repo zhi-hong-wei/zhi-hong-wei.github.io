@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>markdown语法</title>
+    <url>/2020/11/12/markdown%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="Markdown语法总结"><a href="#Markdown语法总结" class="headerlink" title="Markdown语法总结"></a>Markdown语法总结</h1><h2 id="笔记神器"><a href="#笔记神器" class="headerlink" title="笔记神器"></a>笔记神器</h2><a id="more"></a>
+
+<h2 id="1、标题"><a href="#1、标题" class="headerlink" title="1、标题"></a>1、标题</h2><p>一个#是一级标题，二个#是二级标题，以此类推。支持六级标题。</p>
+<p>注：标准语法一般在#后跟个空格再写文字，貌似简书不加空格也行。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 这是一级标题</span><br><span class="line">## 这是二级标题</span><br><span class="line">### 这是三级标题</span><br><span class="line">#### 这是四级标题</span><br><span class="line">##### 这是五级标题</span><br><span class="line">###### 这是六级标题</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、字体"><a href="#2、字体" class="headerlink" title="2、字体"></a>2、字体</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">**这是加粗的文字**</span><br><span class="line">*这是倾斜的文字*`</span><br><span class="line">***这是斜体加粗的文字***</span><br><span class="line">~~这是加删除线的文字~~</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、引用"><a href="#3、引用" class="headerlink" title="3、引用"></a>3、引用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt;这是引用的内容</span><br><span class="line">&gt;&gt;这是引用的内容</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;这是引用的内容</span><br></pre></td></tr></table></figure>
+
+<p>效果图：</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<p>这是引用的内容</p>
+</blockquote>
+</blockquote>
+<h2 id="4、分割线"><a href="#4、分割线" class="headerlink" title="4、分割线"></a>4、分割线</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">----</span><br><span class="line">***</span><br><span class="line">*****</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、图片"><a href="#5、图片" class="headerlink" title="5、图片"></a>5、图片</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![图片alt](图片地址 &apos;&apos;图片title&apos;&apos;)</span><br><span class="line"></span><br><span class="line">图片alt就是显示在图片下面的文字，相当于对图片内容的解释。</span><br><span class="line">图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、超链接"><a href="#6、超链接" class="headerlink" title="6、超链接"></a>6、超链接</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[超链接名](超链接地址 &quot;超链接title&quot;)</span><br><span class="line">title可加可不加</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[简书](http://jianshu.com)</span><br><span class="line">[百度](http://baidu.com)</span><br></pre></td></tr></table></figure>
+
+<p>如果想在新页面打开：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;a href=&quot;超链接地址&quot; target=&quot;_blank&quot;&gt;超链接名&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">示例</span><br><span class="line">&lt;a href=&quot;https://www.jianshu.com/u/1f5ac0cf6a8b&quot; target=&quot;_blank&quot;&gt;简书&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、列表"><a href="#7、列表" class="headerlink" title="7、列表"></a>7、列表</h2><h3 id="7-1、有序列表"><a href="#7-1、有序列表" class="headerlink" title="7.1、有序列表"></a>7.1、有序列表</h3><p>数字加点</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 列表内容</span><br><span class="line">2. 列表内容</span><br><span class="line">3. 列表内容</span><br><span class="line"></span><br><span class="line">注意：序号跟内容之间要有空格</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<ol>
+<li>列表内容</li>
+<li>列表内容</li>
+<li>列表内容</li>
+</ol>
+<h3 id="7-2、无序列表"><a href="#7-2、无序列表" class="headerlink" title="7.2、无序列表"></a>7.2、无序列表</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- 列表内容</span><br><span class="line">+ 列表内容</span><br><span class="line">* 列表内容</span><br><span class="line"></span><br><span class="line">注意：- + * 跟内容之间都要有一个空格</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<ul>
+<li>列表内容</li>
+<li>列表内容</li>
+<li>列表内容</li>
+</ul>
+<h2 id="8、表格"><a href="#8、表格" class="headerlink" title="8、表格"></a>8、表格</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">表头|表头|表头</span><br><span class="line">---|:--:|---:</span><br><span class="line">内容|内容|内容</span><br><span class="line">内容|内容|内容</span><br><span class="line"></span><br><span class="line">第二行分割表头和内容。</span><br><span class="line">- 有一个就行，为了对齐，多加了几个</span><br><span class="line">文字默认居左</span><br><span class="line">-两边加：表示文字居中</span><br><span class="line">-右边加：表示文字居右</span><br><span class="line">注：原生的语法两边都要用 | 包起来。此处省略</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、代码"><a href="#9、代码" class="headerlink" title="9、代码"></a>9、代码</h2><p>单行代码：代码之间分别用一个反引号包起来</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">`代码内容`</span><br></pre></td></tr></table></figure>
+
+<p>代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">​</span><br></pre></td></tr></table></figure>
+
+<p>  代码…<br>  代码…<br>  代码…<br>​<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">## 10、一些特殊语法</span><br><span class="line"></span><br><span class="line">空格符：</span><br></pre></td></tr></table></figure></p>
+<p>从小到大：<br>小：&amp;nbsp  中：ensp  大：emsp</p>
+<center>居中的内容</center>
+
+<p>就像使用html一样，使用<br>标签或者在末尾敲击两个空格，然后回车</p>
+<p><font face="黑体">我是黑体字</font><br><font color="red">我是红色</font><br><font size="5">我是5号大小</font><br><font face="黑体" color="green" size="5">我是黑体，绿色，尺寸为5</font></p>
+<pre><code>
+---
+
+### 以上就是比较常用的Markdown语法，日常生活一定够用了，特殊情况请找无所不知的百度大明白！
+</code></pre>]]></content>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Canvas绘图及描框</title>
     <url>/2020/07/22/Canvas%E7%BB%98%E5%9B%BE%E5%8F%8A%E6%8F%8F%E6%A1%86/</url>
     <content><![CDATA[<h1 id="canvas绘制图片和画识别框问题"><a href="#canvas绘制图片和画识别框问题" class="headerlink" title="canvas绘制图片和画识别框问题"></a>canvas绘制图片和画识别框问题</h1><h2 id="canvas知识"><a href="#canvas知识" class="headerlink" title="canvas知识"></a>canvas知识</h2><a id="more"></a>
@@ -60,21 +132,6 @@
       <tags>
         <tag>Js</tag>
         <tag>Js封装</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>小小日记</title>
-    <url>/2020/04/10/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="记述一下这段生活吧"><a href="#记述一下这段生活吧" class="headerlink" title="记述一下这段生活吧"></a>记述一下这段生活吧</h2><a id="more"></a>
-<p>2020/4/10，据此疫情爆发已经时隔两个半月了。要说今年还真是受灾受难的一年，好像一切都约定好了一样，大事频出，小事不断。不过话说回来，这个假期应该是过往以来在家呆的最长时间的一个假期了，也好多陪陪父母。毕竟想到这可能是最后一个长点的假期了（o(╥﹏╥)o），就不想开学了~~<br>&nbsp;</p>
-<p>近段时间，大家都在家里也不让走动，其实我还是蛮喜欢这种安安静静，平平稳稳的生活的。不管日子是精彩绝伦，还是平平淡淡，让自己感到舒心，愉悦！就是我想要的生活！前段时间还和我最好的朋友闹过一段矛盾，ε=(´ο｀*)))唉，那时想想就闹心，我们两个都有错，也不能说具体怪谁，只有等她消消气再说了。不过说起来好笑，不知道为什么，我就是对她说不了狠话…她属于一生气就大脑充血，六亲不认的类型，真生气了，一些难听的话 真的 听得我，就差暴走了。我想骂就是骂不出口，要是给我憋出内伤，以后看我不讹她！哼！豪横~  &emsp;不过现在已经和好了，我可不敢再惹她生气了，心脏受不了！<br>&nbsp;</p>
-<p>按理说，现在已经开学了，研一下。但照这个架势，我不会开学就研二了吧！(ΩДΩ)<br>过得好快啊！最经在家一直在学小程序和vue的一些项目，感觉自己差的还是很多啊！有的时候真是被这些逻辑和没学过的方法搞得头昏脑涨，严重打击自信心啊。但还是要恰饭的嘛！继续学习！还好我感觉自己有种学习的劲头，有的时候学习新知识点，还会有点兴奋！哈哈哈~</p>
-<p>&nbsp;</p>
-<p>有过迷茫，有过压力，有过失落，有过开心！我们想找到自己以后的定位，很难。因为生活在变，一切都有可能改变我们的生活。都说做一个有目标的人，我想我们要定一个指导风向的目标，而真正付诸实践的是我们的每个阶段目标，不积跬步无以至千里。说到自己，我也不知道自己今后会从事什么样的工作，会干多久，过得是否幸福！不过这些都无所谓了，我感觉自己平时也没什么烦心事！就是想得开。哈哈哈~船到桥头自然直，把本阶段做好就OK了！<br>&nbsp;</p>
-<p>希望看到这里的有缘人也能开心的生活！因为没有什么事是过不去的~~❥(^_-)</p>
-]]></content>
-      <tags>
-        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
