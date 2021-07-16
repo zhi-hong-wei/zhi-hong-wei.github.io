@@ -7,20 +7,20 @@
   
   
   
-  <title>节流和防抖 | zhi</title>
+  <title>万物皆可Reduce | zhi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="性能优化问题Js知识">
-<meta name="keywords" content="Js,Js封装">
+  <meta name="description" content="Reduce的五彩世界js知识">
+<meta name="keywords" content="Js,高阶函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="节流和防抖">
-<meta property="og:url" content="http://zhi.com/2020/12/01/节流和防抖/index.html">
+<meta property="og:title" content="万物皆可Reduce">
+<meta property="og:url" content="http://zhi.com/2021/06/12/万物皆可Reduce/index.html">
 <meta property="og:site_name" content="zhi">
-<meta property="og:description" content="性能优化问题Js知识">
+<meta property="og:description" content="Reduce的五彩世界js知识">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-05-08T08:45:45.821Z">
+<meta property="og:updated_time" content="2021-07-12T16:49:33.463Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="节流和防抖">
-<meta name="twitter:description" content="性能优化问题Js知识">
+<meta name="twitter:title" content="万物皆可Reduce">
+<meta name="twitter:description" content="Reduce的五彩世界js知识">
   
     <link rel="alternative" href="/atom.xml" title="zhi" type="application/atom+xml">
   
@@ -273,11 +273,11 @@
         </header>
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-节流和防抖" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-万物皆可Reduce" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a  href="/2020/12/01/节流和防抖/" class="article-date">
-      <time datetime="2020-12-01T06:10:07.000Z" itemprop="datePublished">2020-12-01</time>
+      <a  href="/2021/06/12/万物皆可Reduce/" class="article-date">
+      <time datetime="2021-06-12T14:42:27.000Z" itemprop="datePublished">2021-06-12</time>
 </a>
 
     </div>
@@ -291,7 +291,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      节流和防抖
+      万物皆可Reduce
     </h1>
   
 
@@ -303,7 +303,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Js/">Js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Js封装/">Js封装</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Js/">Js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/高阶函数/">高阶函数</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -313,23 +313,89 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="性能优化问题"><a href="#性能优化问题" class="headerlink" title="性能优化问题"></a>性能优化问题</h1><h2 id="Js知识"><a href="#Js知识" class="headerlink" title="Js知识"></a>Js知识</h2><a id="more"></a>
+        <h1 id="Reduce的五彩世界"><a href="#Reduce的五彩世界" class="headerlink" title="Reduce的五彩世界"></a>Reduce的五彩世界</h1><h2 id="js知识"><a href="#js知识" class="headerlink" title="js知识"></a>js知识</h2><a id="more"></a>
+<p>先来一段代码看看:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 最简单的reduce例子： 数组求和</span><br><span class="line">const array = [1, 2, 3, 4];</span><br><span class="line">const sum = array.reduce((accumulator, currentValue) =&gt; &#123;</span><br><span class="line">    return accumulator + currentValue</span><br><span class="line">&#125;)</span><br><span class="line">console.log(sum) // 数组的总和是：10</span><br></pre></td></tr></table></figure>
 
-<h3 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h3><p>防抖与节流是前端最基本的优化技巧，实现很简单，为了记录下，可供学习参考。</p>
-<h4 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h4><h5 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h5><p>防抖就是在持续触发事件的时候，只有当不触发事件一段时间后才会执行处理的函数，当触发一次事件后，在规定事件内再次触发， 就会清除上次的定时任务，重新创建定时任务。</p>
+<blockquote>
+<p>学习一个API前，我们需要API的功能和作用，再谈使用。</p>
+</blockquote>
+<p>[简介] Array.reduce() 接收一个函数作为累加器 数组中的每个值（从左到右）开始缩减，最终返回函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">array.reduce(function callback(accumulator, currentValue, index, array) &#123;</span><br><span class="line">  // 返回执行某逻辑的结果，做为下一个accumulator的值</span><br><span class="line">  // 返回值可以是：object、array、string、number等等..reduce灵活的根本！！</span><br><span class="line">&#125;, [initialValue])</span><br></pre></td></tr></table></figure>
+
+<p>此方法接受两个参数：</p>
 <ul>
-<li>实现方式：每次触发事件时设置一个延迟调用方法，并且取消之前的延时调用方法</li>
-<li>缺点：如果事件在规定的时间间隔内被不断的触发，则调用方法会被不断的延迟</li>
+<li><p>callback(…) (必须)(接受4个参数：)</p>
+<ul>
+<li>accumulator (初始值、或者通过计算结束后的返回值)</li>
+<li>currentValue (当前元素值)</li>
+<li>currentIndex (当前元素索引)</li>
+<li>sourceArray (源数组)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//防抖debounce代码：</span><br><span class="line">function debounce(fn,delay) &#123;</span><br><span class="line">    var timeout = null; // 创建一个标记用来存放定时器的返回值</span><br><span class="line">    return function (e) &#123;</span><br><span class="line">        // 每当用户输入的时候把前一个 setTimeout clear 掉</span><br><span class="line">        clearTimeout(timeout); </span><br><span class="line">        // 然后又创建一个新的 setTimeout, 这样就能保证interval 间隔内如果时间持续触发，就不会执行 fn 函数</span><br><span class="line">        timeout = setTimeout(() =&gt; &#123;</span><br><span class="line">            fn.apply(this, arguments);</span><br><span class="line">        &#125;, delay);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">// 处理函数</span><br><span class="line">function handle() &#123;</span><br><span class="line">    console.log(&apos;防抖：&apos;, Math.random());</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line">//滚动事件</span><br><span class="line">window.addEventListener(&apos;scroll&apos;, debounce(handle,500));</span><br></pre></td></tr></table></figure>
-
-<h4 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h4><h5 id="概念：-1"><a href="#概念：-1" class="headerlink" title="概念："></a>概念：</h5><p>节流就是在持续触发事件的时候，利用标志位进行控制处理函数是否执行，比如为 true 执行，为 false 不执行<br>通过指定间隔时间修改标志位的值即可实现在指定时间内只触发一次处理函数</p>
+</li>
+<li><p>initialValue (可选)</p>
 <ul>
-<li>实现方式：每次触发事件时，如果当前有等待执行的延时函数，则直接return<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//节流throttle代码：</span><br><span class="line">function throttle(fn,delay) &#123;</span><br><span class="line">    let canRun = true; // 通过闭包保存一个标记</span><br><span class="line">    return function () &#123;</span><br><span class="line">         // 在函数开头判断标记是否为true，不为true则return</span><br><span class="line">        if (!canRun) return;</span><br><span class="line">         // 立即设置为false</span><br><span class="line">        canRun = false;</span><br><span class="line">        // 将外部传入的函数的执行放在setTimeout中</span><br><span class="line">        setTimeout(() =&gt; &#123; </span><br><span class="line">        // 最后在setTimeout执行完毕后再把标记设置为true(关键)表示可以执行下一次循环了。</span><br><span class="line">        // 当定时器没有执行的时候标记永远是false，在开头被return掉</span><br><span class="line">            fn.apply(this, arguments);</span><br><span class="line">            canRun = true;</span><br><span class="line">        &#125;, delay);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">function sayHi(e) &#123;</span><br><span class="line">    console.log(&apos;节流：&apos;, e.target.innerWidth, e.target.innerHeight);</span><br><span class="line">&#125;</span><br><span class="line">window.addEventListener(&apos;resize&apos;, throttle(sayHi,500));</span><br></pre></td></tr></table></figure>
-
+<li>如果不传默认值，第一次执行callback函数的时候会从数组索引1的地方开始、accumulator的值为数组的第一个值</li>
+<li>如果传了，则从数组索引0开始、accumulato的值为默认的值</li>
+<li>如果没有默认值、且数组是空的、则会报错！！</li>
+<li>初始化的值建议还是要传递、reduce灵活变化的根本</li>
+</ul>
+</li>
+<li><p>注意：</p>
+<ul>
+<li>reduce() 对于空数组是不会执行回调函数</li>
+<li>reduce() 如果在没有初始值的空数组上执行则会报错！！！</li>
+<li>reduce() 不会改变原数组</li>
+</ul>
 </li>
 </ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>函数防抖</strong>：将多次操作合并为一次操作进行。原理是维护一个计时器，规定在delay时间后触发函数，但是在delay时间内再次触发的话，就会取消之前的计时器而重新设置。这样一来，只有最后一次操作能被触发。<br><strong>函数节流</strong>：使得一定时间内只触发一次函数。原理是通过判断是否有延迟调用函数未执行。<br><strong>区别</strong>： 函数节流不管事件触发有多频繁，都会保证在规定时间内一定会执行一次真正的事件处理函数，而函数防抖只是在最后一次事件后才触发一次函数。 比如在页面的无限加载场景下，我们需要用户在滚动页面时，<br>每隔一段时间发一次 Ajax 请求，而不是在用户停下滚动页面操作时才去请求数据。这样的场景，就适合用节流技术来实现。</p>
+<hr>
+<p>通过一个简单的案例让我们见识一下 reduce 的强大~<br>题目: 数组对象: 去重id，去除空评论，返回数据用户ID数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let user = [</span><br><span class="line">  &#123;id: 1, content: &apos;吱吱吱&apos;&#125;,</span><br><span class="line">  &#123;id: 2, content: &apos;&apos;&#125;,</span><br><span class="line">  &#123;id: 2, content: &apos;&apos;&#125;,</span><br><span class="line">  &#123;id: 3, content: &apos;智智智&apos;&#125;,</span><br><span class="line">  &#123;id: 3, content: &apos;宏宏宏&apos;&#125;,</span><br><span class="line">  &#123;id: 3, content: &apos;伟伟伟&apos;&#125;,</span><br><span class="line">  &#123;id: 4, content: &apos;滴滴滴&apos;&#125;,</span><br><span class="line">  &#123;id: 5, content: &apos;呃呃呃&apos;&#125;,</span><br><span class="line">  &#123;id: 6, content: &apos;哒哒哒&apos;&#125;,</span><br><span class="line">  &#123;id: 7, content: &apos;咚咚咚&apos;&#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>常见做法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 简单～ 这样不是挺香吗？：(ps:只是举例、还有很多其他方式～)</span><br><span class="line">Array.from(new Set(user.filter(e =&gt; e.content).map(e =&gt; e.id)))</span><br><span class="line">// [1, 3, 4, 5, 6, 7]</span><br></pre></td></tr></table></figure>
+
+<p>使用reduce：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user.reduce((accumulator, value) =&gt; &#123;</span><br><span class="line">    const id = value.id </span><br><span class="line">    return id &amp;&amp; !accumulator.includes(id) ? [...accumulator, value.id] : accumulator</span><br><span class="line">&#125;, [])</span><br><span class="line">// [1, 3, 4, 5, 6, 7]</span><br><span class="line">// 是不是不用 map filter from Set...这些操作了呢？</span><br></pre></td></tr></table></figure>
+
+<h3 id="reduce的替身术："><a href="#reduce的替身术：" class="headerlink" title="reduce的替身术："></a>reduce的替身术：</h3><blockquote>
+<p>reduce替换map</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const arr = [&#123;name:&apos;Amy&apos;, age: 10&#125;, &#123;name:&apos;Bob&apos;, age: 20&#125;]</span><br><span class="line">// map用法</span><br><span class="line">arr.map(itme =&gt; itme.name) // [&quot;Amy&quot;, &quot;Bob&quot;]</span><br><span class="line"></span><br><span class="line">// 利用扩展运算符 与默认参数</span><br><span class="line">arr.reduce((total, value) =&gt; [...total, value.name], []) // [&quot;Amy&quot;, &quot;Bob&quot;]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>reduce替换filter</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const arr = [&#123;name:&apos;Amy&apos;&#125;, &#123;name:&apos;Bob&apos;&#125;]</span><br><span class="line">// filter用法</span><br><span class="line">arr.filter(itme =&gt; itme.name === &apos;Amy&apos;)</span><br><span class="line">// [&#123;name: &quot;Amy&quot;&#125;]</span><br><span class="line"></span><br><span class="line">// 利用三元表达式、如果是真扩展的方式返回、如果是假不处理返回原来的值</span><br><span class="line">arr.reduce((total, value) =&gt; value.name === &apos;Amy&apos; ? [...total, value] : total, [])</span><br><span class="line">// [&#123;name: &quot;Amy&quot;&#125;]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>reduce 替代 map + filter</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const arr = [&#123;name:&apos;Amy&apos;, age: &apos;18&apos;&#125;, &#123;name:&apos;LaLa&apos;, age: &apos;18&apos;&#125;, &#123;name:&apos;Bob&apos;, age: &apos;22&apos;&#125;]</span><br><span class="line">// filter + map 用法</span><br><span class="line">arr.filter(item =&gt; item.age === &apos;18&apos;).map(item =&gt; item.name)</span><br><span class="line"></span><br><span class="line">// 利用扩展运算符 与默认参数</span><br><span class="line">arr.reduce((total, value) =&gt; value.age === &apos;18&apos; ? [...total, value.name] : total, [])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>reduce替换some</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const arr = [&#123;name:&apos;Amy&apos;, age:18&#125;, &#123;name:&apos;Bob&apos;, age:20&#125;]</span><br><span class="line"></span><br><span class="line">// some 当有一个满足条件就是true</span><br><span class="line">arr.reduce((total, value) =&gt; total || value.age &gt; 18, false)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>reduce替换every</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const arr = [&#123;name:&apos;Amy&apos;, age:18&#125;, &#123;name:&apos;Bob&apos;, age:20&#125;]</span><br><span class="line"></span><br><span class="line">// every 当所有的条件都满足的时候才返回true</span><br><span class="line">arr.reduce((total, value) =&gt; total &amp;&amp; value.age &gt; 18, true)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>reduce替换flat方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 简化版：</span><br><span class="line">var arr = [1, 2, 3, 4, [1, 2, 3, 4, 5, [2, 3, 4]]]</span><br><span class="line"></span><br><span class="line">function arrFlat(data) &#123;</span><br><span class="line">  return data.reduce((total, value) =&gt; &#123;</span><br><span class="line">    return Array.isArray(value) ? [...total, ...arrFlat(value)] : [...total, value]</span><br><span class="line">  &#125;, [])</span><br><span class="line">&#125;</span><br><span class="line">arrFlat(arr)</span><br><span class="line">// (12) [1, 2, 3, 4, 1, 2, 3, 4, 5, 2, 3, 4]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>reduce数组去重</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const arr = [&apos;a&apos;, &apos;a&apos;, &apos;b&apos;, &apos;b&apos;, &apos;c&apos;, &apos;c&apos;, &apos;d&apos;]</span><br><span class="line"></span><br><span class="line">arr.reduce((total, value) =&gt;  total.includes(value) ? total : [...total, value], [])</span><br><span class="line">// (4) [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>合理的运用reduce，你会有意想不到的效果，但是还是结合自身逻辑使用，不可强用^_^，合适最重要！</p>
 
       
     </div>
@@ -338,13 +404,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a  href="/2020/12/01/节流和防抖/">节流和防抖</a></p>
+        <p><span>本文标题:</span><a  href="/2021/06/12/万物皆可Reduce/">万物皆可Reduce</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 智宏伟 的个人博客">智宏伟</a></p>
-        <p><span>发布时间:</span>2020年12月01日 - 14时10分</p>
-        <p><span>最后更新:</span>2021年05月08日 - 16时45分</p>
+        <p><span>发布时间:</span>2021年06月12日 - 22时42分</p>
+        <p><span>最后更新:</span>2021年07月13日 - 00时49分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/12/01/节流和防抖/" title="节流和防抖">http://zhi.com/2020/12/01/节流和防抖/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://zhi.com/2020/12/01/节流和防抖/　　作者: 智宏伟" title=""></span>
+            <span>原始链接:</span><a class="post-url" href="/2021/06/12/万物皆可Reduce/" title="万物皆可Reduce">http://zhi.com/2021/06/12/万物皆可Reduce/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhi.com/2021/06/12/万物皆可Reduce/　　作者: 智宏伟" title=""></span>
         </p>
         <p>
             <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -355,18 +421,9 @@
 
 <nav id="article-nav">
   
-    <a  href="/2021/03/22/Canvas绘图及描框/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Canvas绘图及描框
-        
-      </div>
-    </a>
   
-  
-    <a  href="/2020/11/05/JS同步与异步/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Js同步与异步</div>
+    <a  href="/2021/05/08/LeetCode笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode总结</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -378,7 +435,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#性能优化问题"><span class="toc-number">1.</span> <span class="toc-text">性能优化问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Js知识"><span class="toc-number">1.1.</span> <span class="toc-text">Js知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#防抖与节流"><span class="toc-number">1.1.1.</span> <span class="toc-text">防抖与节流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#防抖"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">防抖</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#概念："><span class="toc-number">1.1.1.1.1.</span> <span class="toc-text">概念：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#节流"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">节流</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#概念：-1"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">概念：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Reduce的五彩世界"><span class="toc-number">1.</span> <span class="toc-text">Reduce的五彩世界</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#js知识"><span class="toc-number">1.1.</span> <span class="toc-text">js知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#reduce的替身术："><span class="toc-number">1.1.1.</span> <span class="toc-text">reduce的替身术：</span></a></li></ol></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -439,13 +496,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a  href="/2021/03/22/Canvas绘图及描框/" title="上一篇: Canvas绘图及描框">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a  href="/2020/11/05/JS同步与异步/" title="下一篇: Js同步与异步">
+            <a  href="/2021/05/08/LeetCode笔记/" title="下一篇: LeetCode总结">
                 <i class="fa fa-angle-right"></i>
             </a>
         
